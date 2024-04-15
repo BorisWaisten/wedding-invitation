@@ -28,32 +28,19 @@ export default function Header() {
                     muted
                     style={{
                         width: '100%',
-                        height: '100vh',
+                        height: '150vh',
                         objectFit: 'cover',
                         position: 'fixed',
                         top: 0,
                         left: 0,
-                        zIndex: -1
+                        zIndex: -1,
+                        marginBlockStart: '-100px'
                     }}
                 >
                     <source src={videoUrl} type="video/mp4" />
                     Tu navegador no soporta la reproducción de video.
                 </video>
-            ) : (
-                <div style={{
-                    background: 'black',
-                    width: '100%',
-                    height: '100vh',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    fontFamily: 'monospace',
-                    color: 'white'
-                }}>
-                    <p>Cargando...</p>
-                </div>
-            )}
+            ) : null}
             <div style={{
                 position: 'relative',
                 zIndex: 1

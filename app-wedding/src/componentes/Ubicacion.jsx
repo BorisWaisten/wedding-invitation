@@ -1,38 +1,56 @@
 'use client'
+import React from 'react';
+import Button from 'react-bootstrap/Button';
 
-import React, { useState, useEffect } from 'react';
-
-export default function Ubicacion() {
-    const [civilAddress, setCivilAddress] = useState("");
-    const [partyAddress, setPartyAddress] = useState("");
-
-    useEffect(() => {
-        // Dirección del casamiento civil
-        const civilAddress = "Prebistero Joannas 129, urdinarrain, entre ríos";
-        setCivilAddress(civilAddress);
-
-        // Dirección de la fiesta
-        const partyAddress = "Prebistero Joannas 300, urdinarrain, entre ríos";
-        setPartyAddress(partyAddress);
-    }, []);
-
-    const openMap = (address) => {
-        const mapUrl = `https://maps.app.goo.gl/NPkAaXMpgEAWsPnc8`;
+function EventInfo({ title,body, address, mapUrl }) {
+    const openMap = () => {
         window.open(mapUrl, '_blank');
     };
 
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center',height:'200px',backgroundColor:'#F3E5F5' }}>
-            <div>
-                <h2>Casamiento Civil</h2>
-                <p>{civilAddress}</p>
-                <button style={{ marginRight: '10px', color :'blue' }} onClick={() => openMap(civilAddress)}>Ver en Google Maps</button>
-            </div>
-            <div>
-                <h2>Fiesta</h2>
-                <p>{partyAddress}</p>
-                <button style={{ marginRight: '10px', color :'blue' }} onClick={() => openMap(partyAddress)}>Ver en Google Maps</button>
-            </div>
+        <div style={{ marginBottom: '20px' }}>
+            <h2>{title}</h2>
+            <p>{body}</p>
+            <p>{address}</p>
+            <Button variant="outline-dark" onClick={openMap}>Ver en el mapa</Button>
+        </div>
+    );
+}
+
+export default function Ubicacion() {
+    const eventDetails = [
+        {
+            title: 'Casamiento Civil',
+            body:'Celebracion a las 10:00',
+            address: 'Celebracion 10:00,Prebistero Joannas 129, urdinarrain, entre ríos',
+            mapUrl: 'https://maps.app.goo.gl/NPkAaXMpgEAWsPnc8'
+        },
+        {
+            title: 'Fiesta',
+            body:'Celebracion a las 10:00',
+            address: 'Prebistero Joannas 300, urdinarrain, entre ríos',
+            mapUrl: 'https://maps.app.goo.gl/NPkAaXMpgEAWsPnc8'
+        }
+    ];
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h1>Ceremonia</h1>
+            {eventDetails.map(event => (
+                <EventInfo
+                    key={event.title}
+                    title={event.title}
+                    body={event.body}
+                    address={event.address}
+                    mapUrl={event.mapUrl}
+                />
+            ))}
+            <h1>Vestimenta</h1>
+            <p>Vestimenta formal</p>
+            <h1>Regalos</h1>
+            <p>Puedes realizar tu regalo a través de la siguiente CBU: XXXX XXXX XXXX XXXX</p>
+            <h1>Confirmación de Asistencia</h1>
+            <p>Por favor, confirma tu asistencia completando el siguiente formulario: <a href="URL_DEL_FORMULARIO">Formulario de Confirmación</a></p>
         </div>
     );
 }
